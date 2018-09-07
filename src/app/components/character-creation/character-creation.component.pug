@@ -1,3 +1,26 @@
-
-p character-creation works!
-
+.container-fluid
+  .row.h-100
+    .col-3.sidebar.p-3.text-center
+      h1 Races
+      ul
+        li.mb-3.py-2(*ngFor='let race of races', (click)='changeRace(race)', [class.active]='character.race === race')
+          | {{race}}
+    .col-6.text-center.text-white.p-3
+      h2 Race
+      p {{character.race}}
+      h2 Class
+      p {{character.class}}
+      h2 Gender
+      .d-flex.justify-content-center
+        .gender-button.mr-1([class.active]="character.gender === 'Male'", (click)="changeGender('Male')")
+          i.fas.fa-mars
+        .gender-button.mr-1([class.active]="character.gender === 'Female'", (click)="changeGender('Female')")
+          i.fas.fa-venus
+      h2 Name
+      input.mb-5.px-2(type='text', placeholder='Name', [(ngModel)]='character.name', (input)='changeName()')
+      button.btn.continue-button.px-5.py-2.mx-auto([class.disabled]='!characterComplete', (click)='createCharacter()') Create Character
+    .col-3.sidebar.p-3.text-center
+      h1 Classes
+      ul
+        li.mb-3.py-2(*ngFor='let class of classes', (click)='changeClass(class)', [class.active]='character.class === class')
+          | {{class}}
