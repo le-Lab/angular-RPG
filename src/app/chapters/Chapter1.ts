@@ -28,7 +28,7 @@ export const Chapter1: Chapter = {
       new Weapon('Lame Rouillé', 1, 6)
     ],
     newHero: new Warrior('Elvin', GenderOptions.male, RaceOptions.elf, 1, 10, {
-      attack: 2, sneak: 1, persuade: 1, intellgence: 1
+      attack: 2, sneak: 1, persuade: 1, intelligence: 1
     }, new Weapon('Dague', 1, 4), new Armor('Habits', 0))
   },
   nextChapter: null

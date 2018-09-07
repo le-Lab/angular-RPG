@@ -106,7 +106,7 @@ export class Monster extends BaseCharacter {
   isStrongPoison: false;
   hasTakenPoisonDamageThisTurn: false;
 
-  constructor(name, health, skills, barriers = {
+  constructor(name, health, skills, barriers: {
     attack: number,
     sneak: number,
     persuade: number
