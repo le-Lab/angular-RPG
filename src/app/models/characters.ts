@@ -26,7 +26,7 @@ export enum CharactersSkills {
   attack = 'attack',
   sneak = 'sneak',
   persuade = 'persuade',
-  intellgence = 'intelligence'
+  intelligence = 'intelligence'
 }
 
 export enum FightOptions {
@@ -65,7 +65,7 @@ export class BaseCharacter {
   };
   equippedWeapon: Weapon;
   equippedArmor: Armor;
-  spriteUrl: number;
+  spriteUrl: string;
 
   constructor(name: string, health: number, skills = {attack: 0, sneak: 0, persuade: 0, intelligence: 0}) {
     this.name = name;
@@ -106,7 +106,7 @@ export class Monster extends BaseCharacter {
   isStrongPoison: false;
   hasTakenPoisonDamageThisTurn: false;
 
-  constructor(name: string, health: number, skills, barriers = {
+  constructor(name, health, skills, barriers = {
     attack: number,
     sneak: number,
     persuade: number
@@ -169,8 +169,8 @@ export class Hero extends BaseCharacter {
 }
 
 export class Warrior extends Hero {
-  constructor(name, gender, rance, level, health, skills, weapon, armor) {
-    super(name, gender, rance, level, health, skills, weapon, armor);
+  constructor(name, gender, race, level, health, skills, weapon, armor) {
+    super(name, gender, race, level, health, skills, weapon, armor);
 
     this.characterRole = ClassOptions.warrior;
     this.skills.attack += 2;
@@ -188,8 +188,8 @@ export class Warrior extends Hero {
 }
 
 export class Ranger extends Hero {
-  constructor(name, gender, rance, level, health, skills, weapon, armor) {
-    super(name, gender, rance, level, health, skills, weapon, armor);
+  constructor(name, gender, race, level, health, skills, weapon, armor) {
+    super(name, gender, race, level, health, skills, weapon, armor);
 
     this.characterRole = ClassOptions.ranger;
     this.skills.sneak += 2;
@@ -207,8 +207,8 @@ export class Ranger extends Hero {
 }
 
 export class Rogue extends Hero {
-  constructor(name, gender, rance, level, health, skills, weapon, armor) {
-    super(name, gender, rance, level, health, skills, weapon, armor);
+  constructor(name, gender, race, level, health, skills, weapon, armor) {
+    super(name, gender, race, level, health, skills, weapon, armor);
 
     this.characterRole = ClassOptions.rogue;
     this.skills.sneak += 2;
@@ -226,8 +226,8 @@ export class Rogue extends Hero {
 }
 
 export class Priest extends Hero {
-  constructor(name, gender, rance, level, health, skills, weapon, armor) {
-    super(name, gender, rance, level, health, skills, weapon, armor);
+  constructor(name, gender, race, level, health, skills, weapon, armor) {
+    super(name, gender, race, level, health, skills, weapon, armor);
 
     this.characterRole = ClassOptions.priest;
     this.skills.intelligence += 2;
@@ -270,4 +270,4 @@ export const checkRace = (hero: Hero) => {
     default:
       break;
   }
-  ;
+};

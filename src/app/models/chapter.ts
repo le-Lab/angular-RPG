@@ -12,7 +12,7 @@ export enum FailureOptions {
   nextChapter
 }
 
-export enum SuccesOptions {
+export enum SuccessOptions {
   rewardExperience,
   rewardEquipement,
   addHeroToParty
@@ -23,8 +23,8 @@ export class Chapter {
   options: CharacterAction[];
   enemyPart: Monster[];
   sneakPersuadeFail: CharacterAction;
-  itFail: FailureOptions;
-  ifSucceed: SuccesOptions[];
+  ifFail: FailureOptions;
+  ifSucceed: SuccessOptions[];
   rewards: {
     experience: number,
     equipment: (Weapon | Armor)[];
