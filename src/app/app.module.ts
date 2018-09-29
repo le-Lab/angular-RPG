@@ -8,23 +8,24 @@ import {CharacterCreationComponent} from './components/character-creation/charac
 import {InventoryComponent} from './components/inventory/inventory.component';
 import {StartComponent} from './components/start/start.component';
 import {StoryComponent} from './components/story/story.component';
-
+import {GameControllerService} from './services/game-controller.service';
 
 
 const routes: Routes = [
   {
-    path: "", component: StartComponent
+    path: '', component: StartComponent
   },
   {
-    path: "story", component: StoryComponent
+    path: 'story', component: StoryComponent
   },
   {
-    path: "character-creation", component: CharacterCreationComponent
-  },{
-    path: "fight", component: FightComponent
+    path: 'character-creation', component: CharacterCreationComponent
+  }, {
+    path: 'fight', component: FightComponent
   },
   {
-    path: "**", redirectTo: ""}
+    path: '**', redirectTo: ''
+  }
 ];
 
 @NgModule({
@@ -41,7 +42,9 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     FormsModule
   ],
-  providers: [],
+  providers: [
+    GameControllerService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

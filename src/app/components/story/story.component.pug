@@ -1,2 +1,17 @@
-p story works!
-
+.container.body-content.py-5.h-75
+  .h-100.story-container.p-3
+    p.text-white.col-12(*ngFor='let paragraph of currentChapter.story')
+      | {{ paragraph }}
+    .m-3
+      button.btn.encounter-option.mr-3(*ngFor='let option of currentChapter.options', (click)='chooseAction(option)')
+        | {{ option }}
+    p.text-white.col-12
+      | {{ displayMessage }}
+    p.text-white.col-12(*ngFor='let message of successMessages')
+      | {{ message }}
+    .m-3(*ngIf='showNextChapterButton')
+      button.btn.encounter-option((click)='nextChapter()')
+        | Prochain chapitre
+.container-fluid.h-25
+  .row.h-100.options-bar.justify-content-center
+    app-inventory

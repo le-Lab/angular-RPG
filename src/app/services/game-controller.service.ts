@@ -18,11 +18,12 @@ export class GameControllerService {
   isFighting = false;
 
   actionDelay = 1500;
-  heroPaty: Hero[] = [];
+  heroParty: Hero[] = [];
   partyInventory: (Weapon | Armor) [] = [];
-  enemyPart: Monster[] = this.currentChapter.enemyPart;
+  availableHeroes: Hero[] = [];
+  enemyParty: Monster[] = this.currentChapter.enemyPart;
 
-  setMainCharacter(character: { name: string, class: ClassOptions, race: RaceOptions, gender: GenderOptions }) {
+  setMainCharacter(character) {
     switch (character.class) {
       case ClassOptions.warrior:
         this.mainCharacter = new Warrior(character.name, character.gender, character.race, 1, 10, {
@@ -57,17 +58,17 @@ export class GameControllerService {
         }, new Weapon('Couteau', 1, 3), new Armor('Habits', 0));
     }
     checkRace(this.mainCharacter);
-    this.heroPaty.push(this.mainCharacter);
+    this.heroParty.push(this.mainCharacter);
     this.router.navigateByUrl('/story');
   }
 
-  encounterSucces(): string[] {
+  encounterSuccess(): string[] {
     const messages: string[] = [];
     this.currentChapter.ifSucceed.forEach(reward => {
       switch (reward) {
         case SuccessOptions.rewardExperience:
           messages.push(`Tous les membres de votre equipe ont reçu ${this.currentChapter.rewards.experience} experience.`);
-          this.heroPaty.forEach(hero => {
+          this.heroParty.forEach(hero => {
             hero.experience += this.currentChapter.rewards.experience;
             if (hero.experience >= ExperienceToLevel[hero.level]) {
               messages.push(`${hero.name} monte d'un niveau ! Ses stats ont augmentés et sont visibles dans l'inventaire.`);
@@ -88,11 +89,12 @@ export class GameControllerService {
           break;
         case SuccessOptions.addHeroToParty:
           const newHero: Hero = this.currentChapter.rewards.newHero;
-          if (this.heroPaty.length < 3) {
+          if (this.heroParty.length < 3) {
             messages.push(`Un nouveau hero rejoint votre equipe! ${newHero.name} - ${newHero.characterRole} - niveau: ${newHero.level}`);
-            this.heroPaty.push(newHero);
+            this.heroParty.push(newHero);
           } else {
             messages.push(`un nouveau hero est disponible pour votre equipe! ${newHero.name} - ${newHero.characterRole} - niveau: ${newHero.level}`);
+            this.availableHeroes.push(newHero);
           }
           break;
       }
@@ -101,18 +103,18 @@ export class GameControllerService {
   }
 
   nextChapter(): void {
-    this.heroPaty.forEach(hero => hero.rest());
+    this.heroParty.forEach(hero => hero.rest());
     this.currentChapter = this.currentChapter.nextChapter;
-    this.enemyPart = this.currentChapter.enemyPart;
+    this.enemyParty = this.currentChapter.enemyPart;
   }
 
   gameOver(): void {
     this.mainCharacter = undefined;
     this.currentChapter = Chapter1;
-    this.heroPaty = [];
+    this.heroParty = [];
     this.partyInventory = [];
-    this.avaiblableHeroes = [];
-    this.enemyPart = this.currentChapter.enemyPart;
+    this.availableHeroes = [];
+    this.enemyParty = this.currentChapter.enemyPart;
 
     this.router.navigateByUrl('/');
 
